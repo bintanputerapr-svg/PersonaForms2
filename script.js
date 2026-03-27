@@ -439,6 +439,7 @@ function renderScale(field) {
   right.textContent = field.rightLabel || "Sangat setuju";
   const bubbles = document.createElement("div");
   bubbles.className = "scale-bubbles";
+  bubbles.style.setProperty("--steps", String(field.scaleSteps));
   scaleStyles(field.scaleSteps).forEach((style, index) => {
     const label = document.createElement("label");
     label.className = `bubble-option ${style}`;
@@ -722,10 +723,10 @@ function scaleSizes(steps) {
   const isMobile = window.matchMedia("(max-width: 920px)").matches;
   const center = (steps - 1) / 2;
   const edgeSize = isMobile
-    ? (steps >= 9 ? 32 : steps >= 7 ? 36 : 40)
+    ? (steps >= 9 ? 26 : steps >= 7 ? 30 : 34)
     : 60;
   const centerSize = isMobile
-    ? (steps >= 9 ? 18 : steps >= 7 ? 22 : 28)
+    ? (steps >= 9 ? 16 : steps >= 7 ? 18 : 22)
     : 44;
 
   return Array.from({ length: steps }, (_, index) => {

@@ -22,6 +22,12 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -437,6 +443,7 @@ select:focus {
   padding: 14px 16px;
   border-radius: 18px;
   background: rgba(65, 86, 107, 0.06);
+  min-width: 0;
 }
 
 .choice-chip input[type="radio"] {
@@ -451,6 +458,8 @@ select:focus {
 
 .choice-chip input[type="text"] {
   min-width: 220px;
+  max-width: 100%;
+  flex: 1 1 auto;
 }
 
 .scale-response {
@@ -573,6 +582,29 @@ th {
 }
 
 @media (max-width: 920px) {
+  body {
+    background: linear-gradient(180deg, #f7faf9 0%, #eef5f3 100%);
+  }
+
+  .ambient {
+    display: none;
+  }
+
+  .brand-row,
+  .panel,
+  .glass-card,
+  .section-card,
+  .builder-card {
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  button,
+  button:hover {
+    transition: none;
+    transform: none;
+  }
+
   .app-shell {
     width: min(1220px, calc(100% - 10px));
     padding: 8px 0 20px;
@@ -638,6 +670,27 @@ th {
     gap: 6px;
     width: 100%;
     padding-bottom: 2px;
+    overflow: hidden;
+  }
+
+  .bubble-option {
+    width: min(var(--bubble-size, 32px), calc((100% - (var(--steps, 7) - 1) * 6px) / var(--steps, 7)));
+    height: min(var(--bubble-size, 32px), calc((100% - (var(--steps, 7) - 1) * 6px) / var(--steps, 7)));
+    flex: 0 1 auto;
+  }
+
+  .bubble-option span {
+    border-width: 2.5px !important;
+  }
+
+  .choice-chip {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .choice-chip input[type="text"] {
+    min-width: 0;
+    width: 100%;
   }
 
   .scale-side {

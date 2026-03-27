@@ -483,7 +483,7 @@ function renderBuilder(container, fields, labelPrefix, key) {
 
     const survey = activeSurvey();
     const ref = survey[key][index];
-    node.querySelector(".field-label-input").addEventListener("input", (e) => updateField(ref, "label", e.target.value));
+    node.querySelector(".field-label-input").addEventListener("input", (e) => updateField(ref, "label", e.target.value, false));
     node.querySelector(".field-type-select").addEventListener("change", (e) => {
       ref.type = e.target.value;
       if (ref.type === "statement") ref.required = false;
@@ -491,16 +491,16 @@ function renderBuilder(container, fields, labelPrefix, key) {
       persist();
       renderAll();
     });
-    node.querySelector(".field-placeholder-input").addEventListener("input", (e) => updateField(ref, "placeholder", e.target.value));
-    node.querySelector(".field-required").addEventListener("change", (e) => updateField(ref, "required", e.target.checked));
+    node.querySelector(".field-placeholder-input").addEventListener("input", (e) => updateField(ref, "placeholder", e.target.value, false));
+    node.querySelector(".field-required").addEventListener("change", (e) => updateField(ref, "required", e.target.checked, false));
     node.querySelector(".field-options-input").addEventListener("input", (e) => {
       ref.options = e.target.value.split("\n").map((item) => item.trim()).filter(Boolean);
       persist();
       renderAll();
     });
-    node.querySelector(".field-scale-steps").addEventListener("input", (e) => updateField(ref, "scaleSteps", clamp(e.target.value, 2, 10, 5)));
-    node.querySelector(".field-left-label").addEventListener("input", (e) => updateField(ref, "leftLabel", e.target.value));
-    node.querySelector(".field-right-label").addEventListener("input", (e) => updateField(ref, "rightLabel", e.target.value));
+    node.querySelector(".field-scale-steps").addEventListener("input", (e) => updateField(ref, "scaleSteps", clamp(e.target.value, 2, 10, 5), false));
+    node.querySelector(".field-left-label").addEventListener("input", (e) => updateField(ref, "leftLabel", e.target.value, false));
+    node.querySelector(".field-right-label").addEventListener("input", (e) => updateField(ref, "rightLabel", e.target.value, false));
     node.querySelector(".remove-field").addEventListener("click", () => {
       survey[key] = survey[key].filter((item) => item.id !== ref.id);
       persist();
@@ -531,10 +531,15 @@ function renderResponsesTable() {
   }).join("");
 }
 
-function updateField(field, key, value) {
+function updateField(field, key, value, rerender = true) {
   field[key] = value;
   persist();
-  renderAll();
+  if (rerender) {
+    renderAll();
+    return;
+  }
+  renderPublicForm();
+  renderResponsesTable();
 }
 
 function fieldRow(field, surveyId, section, position) {

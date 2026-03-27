@@ -715,6 +715,14 @@ th {
     padding-inline: 8px;
   }
 
+  #respondent-view > .section-bar {
+    display: none;
+  }
+
+  #public-status {
+    margin-top: 0;
+  }
+
   #respondent-view .section-card {
     background: transparent;
     border: 0;

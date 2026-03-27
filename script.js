@@ -38,6 +38,10 @@ init();
 
 async function init() {
   initBackend();
+  if (backend.enabled) {
+    document.querySelector(".fallback-form")?.classList.add("hidden");
+    document.querySelector(".fallback-form + .muted")?.classList.add("hidden");
+  }
   await loadPublicSurvey();
   await loadResponses();
   if (backend.enabled) {
@@ -199,6 +203,7 @@ async function handleAuthLogin(event) {
 
 function handleLocalAccess(event) {
   event.preventDefault();
+  if (backend.enabled) return alert("Akses lokal dinonaktifkan saat mode online aktif.");
   if ($("#access-code").value.trim() !== PASSCODE) return alert("Password lokal salah.");
   researcherUnlocked = true;
   renderAll();
@@ -427,10 +432,10 @@ function renderScale(field) {
   const wrap = document.createElement("div");
   wrap.className = "scale-response";
   const left = document.createElement("span");
-  left.className = "muted";
+  left.className = "muted scale-side scale-side-left";
   left.textContent = field.leftLabel || "Sangat tidak setuju";
   const right = document.createElement("span");
-  right.className = "muted";
+  right.className = "muted scale-side scale-side-right";
   right.textContent = field.rightLabel || "Sangat setuju";
   const bubbles = document.createElement("div");
   bubbles.className = "scale-bubbles";
@@ -710,7 +715,7 @@ function scaleSizes(steps) {
   const center = (steps - 1) / 2;
   return Array.from({ length: steps }, (_, index) => {
     const distance = Math.abs(index - center);
-    const factor = center === 0 ? 0 : 1 - (distance / center);
+    const factor = center === 0 ? 1 : distance / center;
     return Math.round(44 + factor * 16);
   });
 }

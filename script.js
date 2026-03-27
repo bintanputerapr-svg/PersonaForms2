@@ -496,7 +496,8 @@ function renderBuilder(container, fields, labelPrefix, key) {
     node.querySelector(".field-options-input").addEventListener("input", (e) => {
       ref.options = e.target.value.split("\n").map((item) => item.trim()).filter(Boolean);
       persist();
-      renderAll();
+      renderPublicForm();
+      renderResponsesTable();
     });
     node.querySelector(".field-scale-steps").addEventListener("input", (e) => updateField(ref, "scaleSteps", clamp(e.target.value, 2, 10, 5), false));
     node.querySelector(".field-left-label").addEventListener("input", (e) => updateField(ref, "leftLabel", e.target.value, false));

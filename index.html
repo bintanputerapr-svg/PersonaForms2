@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PersonaForms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-left"></div>
+  <div class="ambient ambient-right"></div>
+
+  <div class="app-shell">
+    <header class="site-header">
+      <div class="brand-row">
+        <div class="brand-lockup">
+          <div class="brand-mark">
+            <span class="dot teal"></span>
+            <span class="dot green"></span>
+            <span class="dot gold"></span>
+            <span class="dot lilac"></span>
+          </div>
+          <div>
+            <p class="eyebrow">PersonaForms Research</p>
+            <h1>PersonaForms</h1>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button class="ghost-button" data-view-target="respondent">Isi Kuisioner</button>
+          <button class="ghost-button" data-view-target="researcher">Portal Peneliti</button>
+        </div>
+      </div>
+
+      <section class="hero">
+        <span class="hero-badge">Sederhana, lembut, dan siap dibagikan</span>
+        <h2 id="hero-title">Bangun kuisioner riset bergaya ringan seperti 16Personalities.</h2>
+        <p id="hero-description" class="hero-text">
+          Peneliti dapat membuat kuisioner seperti Google Forms dengan pertanyaan pilihan ganda, kotak centang,
+          skala linier setuju - tidak setuju, jawaban singkat, paragraf, dan blok pernyataan.
+        </p>
+        <div class="hero-actions">
+          <button class="primary-button" data-view-target="respondent">Buka Form Publik</button>
+          <button class="secondary-button" data-view-target="researcher">Masuk ke Builder</button>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section id="respondent-view" class="panel">
+        <div class="section-bar">
+          <div>
+            <p class="eyebrow accent">Mode Responden</p>
+            <h3 id="respondent-title">Kuisioner</h3>
+          </div>
+          <p id="respondent-description" class="panel-note"></p>
+        </div>
+
+        <div id="public-status" class="status-card"></div>
+
+        <form id="survey-form" class="form-layout">
+          <section class="section-card">
+            <div class="section-heading">
+              <span class="section-step">01</span>
+              <div>
+                <h4>Identitas Responden</h4>
+                <p>Isi bagian ini sesuai pengaturan peneliti.</p>
+              </div>
+            </div>
+            <div id="identity-fields" class="field-stack"></div>
+          </section>
+
+          <section class="section-card">
+            <div class="section-heading">
+              <span class="section-step lilac">02</span>
+              <div>
+                <h4>Pertanyaan dan Pernyataan</h4>
+                <p>Jawab sesuai pengalaman, opini, atau kondisi Anda.</p>
+              </div>
+            </div>
+            <div id="question-fields" class="field-stack"></div>
+          </section>
+
+          <div class="form-actions">
+            <button type="submit" class="primary-button">Kirim Jawaban</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="researcher-view" class="panel hidden">
+        <div class="section-bar">
+          <div>
+            <p class="eyebrow accent">Mode Peneliti</p>
+            <h3>Builder Kuisioner</h3>
+          </div>
+          <p class="panel-note">Login peneliti, kelola banyak kuisioner, lalu ekspor jawaban ke spreadsheet.</p>
+        </div>
+
+        <div id="backend-status" class="status-card"></div>
+
+        <div id="researcher-lock" class="glass-card gate-card">
+          <h4>Login peneliti</h4>
+          <p>Untuk mode online, login dengan akun peneliti Supabase. Disarankan gunakan password peneliti: <strong>niswahjelek</strong>.</p>
+          <form id="auth-form" class="auth-grid">
+            <label class="field">
+              <span>Email peneliti</span>
+              <input id="researcher-email" type="email" placeholder="peneliti@kampus.ac.id">
+            </label>
+            <label class="field">
+              <span>Password</span>
+              <input id="researcher-password" type="password" placeholder="niswahjelek">
+            </label>
+            <div class="form-actions left">
+              <button type="submit" class="primary-button">Masuk sebagai Peneliti</button>
+            </div>
+          </form>
+
+          <form id="access-form" class="inline-form fallback-form">
+            <input id="access-code" type="password" placeholder="Akses lokal darurat">
+            <button type="submit" class="ghost-button">Masuk Lokal</button>
+          </form>
+          <p class="muted">Kode lokal awal juga menggunakan <strong>niswahjelek</strong>.</p>
+        </div>
+
+        <div id="researcher-app" class="hidden workspace-stack">
+          <section class="glass-card">
+            <div class="section-bar compact">
+              <div>
+                <p class="eyebrow">Manajemen Kuisioner</p>
+                <h4>Daftar kuisioner peneliti</h4>
+              </div>
+              <button id="sign-out-button" type="button" class="ghost-button small hidden">Keluar</button>
+            </div>
+
+            <div class="builder-grid two">
+              <label class="field">
+                <span>Pilih kuisioner aktif</span>
+                <select id="survey-selector"></select>
+              </label>
+              <label class="field">
+                <span>Slug / link publik</span>
+                <input id="survey-slug" type="text" placeholder="contoh: survei-gaya-belajar">
+              </label>
+            </div>
+
+            <div class="inline-form survey-actions-row">
+              <button id="new-survey-button" type="button" class="primary-button small">Kuisioner Baru</button>
+              <button id="duplicate-survey-button" type="button" class="secondary-button small">Duplikasi</button>
+              <button id="delete-survey-button" type="button" class="ghost-button small danger">Hapus</button>
+              <button id="open-public-link" type="button" class="ghost-button small">Buka Link Publik</button>
+            </div>
+
+            <label class="field">
+              <span>Tautan publik</span>
+              <input id="share-link" type="text" readonly>
+            </label>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-bar compact">
+              <div>
+                <p class="eyebrow">Pengaturan Form</p>
+                <h4>Informasi umum kuisioner</h4>
+              </div>
+            </div>
+            <div class="builder-grid two">
+              <label class="field">
+                <span>Judul form</span>
+                <input id="survey-title" type="text">
+              </label>
+              <label class="field toggle field-inline">
+                <input id="survey-published" type="checkbox">
+                <span>Terbitkan kuisioner untuk publik</span>
+              </label>
+              <label class="field full">
+                <span>Deskripsi / petunjuk</span>
+                <textarea id="survey-description" rows="5"></textarea>
+              </label>
+            </div>
+            <div class="form-actions left">
+              <button id="save-settings" type="button" class="secondary-button">Simpan Struktur Kuisioner</button>
+            </div>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-bar compact">
+              <div>
+                <p class="eyebrow">Bagian 1</p>
+                <h4>Editor identitas responden</h4>
+              </div>
+              <button id="add-identity-field" type="button" class="primary-button small">Tambah Kolom Identitas</button>
+            </div>
+            <div id="identity-editor" class="builder-stack"></div>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-bar compact">
+              <div>
+                <p class="eyebrow">Bagian 2</p>
+                <h4>Editor pertanyaan dan pernyataan</h4>
+              </div>
+              <button id="add-question-field" type="button" class="primary-button small">Tambah Item</button>
+            </div>
+            <div id="question-editor" class="builder-stack"></div>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-bar compact">
+              <div>
+                <p class="eyebrow">Spreadsheet</p>
+                <h4>Jawaban responden</h4>
+              </div>
+              <div class="header-actions">
+                <button id="download-csv" type="button" class="secondary-button small">Ekspor CSV</button>
+                <button id="clear-responses" type="button" class="ghost-button small danger">Hapus Respons</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="responses-table">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="builder-template">
+    <article class="builder-card">
+      <div class="builder-head">
+        <div>
+          <p class="eyebrow">Item</p>
+          <h5 class="builder-number"></h5>
+        </div>
+        <div class="builder-actions">
+          <label class="toggle">
+            <input type="checkbox" class="field-required">
+            <span>Wajib</span>
+          </label>
+          <button type="button" class="ghost-button small remove-field">Hapus</button>
+        </div>
+      </div>
+
+      <div class="builder-grid">
+        <label class="field full">
+          <span>Pernyataan / pertanyaan</span>
+          <input type="text" class="field-label-input">
+        </label>
+
+        <label class="field">
+          <span>Jenis item</span>
+          <select class="field-type-select">
+            <option value="shortText">Jawaban singkat</option>
+            <option value="longText">Jawaban paragraf</option>
+            <option value="multipleChoice">Pilihan ganda</option>
+            <option value="multipleChoiceOther">Pilihan ganda + lainnya</option>
+            <option value="checkboxes">Kotak centang</option>
+            <option value="scaleAgree">Skala linier setuju - tidak setuju</option>
+            <option value="statement">Pernyataan / teks informasi</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Placeholder</span>
+          <input type="text" class="field-placeholder-input" placeholder="Opsional">
+        </label>
+
+        <label class="field options-only hidden full">
+          <span>Daftar opsi</span>
+          <textarea rows="4" class="field-options-input" placeholder="Satu opsi per baris"></textarea>
+        </label>
+
+        <div class="scale-only hidden scale-editor">
+          <label class="field">
+            <span>Jumlah tombol</span>
+            <input type="number" min="2" max="10" class="field-scale-steps">
+          </label>
+          <label class="field">
+            <span>Label kiri</span>
+            <input type="text" class="field-left-label" placeholder="Sangat tidak setuju">
+          </label>
+          <label class="field">
+            <span>Label kanan</span>
+            <input type="text" class="field-right-label" placeholder="Sangat setuju">
+          </label>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

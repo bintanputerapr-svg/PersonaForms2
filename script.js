@@ -442,8 +442,9 @@ function renderScale(field) {
   scaleStyles(field.scaleSteps).forEach((style, index) => {
     const label = document.createElement("label");
     label.className = `bubble-option ${style}`;
+    label.setAttribute("aria-label", `Skala ${index + 1}`);
     label.style.setProperty("--bubble-size", `${scaleSizes(field.scaleSteps)[index]}px`);
-    label.innerHTML = `<input type="radio" name="${field.id}" value="${index + 1}" ${field.required ? "required" : ""}><span>${index + 1}</span>`;
+    label.innerHTML = `<input type="radio" name="${field.id}" value="${index + 1}" ${field.required ? "required" : ""}><span></span>`;
     bubbles.appendChild(label);
   });
   wrap.append(left, bubbles, right);

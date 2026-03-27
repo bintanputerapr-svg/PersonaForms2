@@ -149,7 +149,7 @@ body {
 }
 
 .hero {
-  text-align: center;
+  text-align: left;
   padding: 56px 18px 24px;
 }
 
@@ -166,10 +166,10 @@ body {
 
 .hero h2 {
   margin-top: 18px;
-  font-size: clamp(2.1rem, 4.8vw, 4rem);
+  font-size: clamp(1.9rem, 4.2vw, 3.3rem);
   line-height: 1.08;
-  max-width: 14ch;
-  margin-inline: auto;
+  max-width: 18ch;
+  margin-inline: 0;
 }
 
 .hero-text,
@@ -185,7 +185,7 @@ body {
 
 .hero-text {
   max-width: 860px;
-  margin: 22px auto 0;
+  margin: 22px 0 0;
   font-size: clamp(1rem, 1.8vw, 1.2rem);
   line-height: 1.75;
   white-space: pre-line;
@@ -205,7 +205,7 @@ body {
 }
 
 .hero-actions {
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 28px;
 }
 
@@ -628,7 +628,7 @@ th {
   }
 
   .hero h2 {
-    font-size: clamp(1.7rem, 9vw, 2.3rem);
+    font-size: clamp(1.55rem, 7.2vw, 2rem);
     line-height: 1.15;
   }
 
@@ -675,7 +675,8 @@ th {
 
   .bubble-option {
     width: min(var(--bubble-size, 32px), calc((100% - (var(--steps, 7) - 1) * 6px) / var(--steps, 7)));
-    height: min(var(--bubble-size, 32px), calc((100% - (var(--steps, 7) - 1) * 6px) / var(--steps, 7)));
+    height: auto;
+    aspect-ratio: 1 / 1;
     flex: 0 1 auto;
   }
 
@@ -707,7 +708,7 @@ th {
   }
 
   .hero h2 {
-    max-width: 12ch;
+    max-width: 16ch;
   }
 
   #respondent-view {

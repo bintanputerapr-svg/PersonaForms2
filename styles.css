@@ -476,10 +476,7 @@ select:focus {
   align-items: center;
   flex-wrap: nowrap;
   gap: 14px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible;
 }
 
 .bubble-option {
@@ -576,21 +573,21 @@ th {
 
 @media (max-width: 920px) {
   .app-shell {
-    width: min(1220px, calc(100% - 16px));
-    padding: 10px 0 30px;
+    width: min(1220px, calc(100% - 10px));
+    padding: 8px 0 20px;
   }
 
   .panel {
-    margin-top: 14px;
-    border-radius: 24px;
-    padding: 16px;
+    margin-top: 10px;
+    border-radius: 18px;
+    padding: 10px;
   }
 
   .section-card,
   .glass-card,
   .rendered-field {
-    border-radius: 18px;
-    padding: 16px;
+    border-radius: 14px;
+    padding: 12px;
   }
 
   .hero {
@@ -611,7 +608,7 @@ th {
   .primary-button,
   .secondary-button,
   .ghost-button {
-    padding: 11px 16px;
+    padding: 10px 14px;
   }
 
   .brand-row,
@@ -631,18 +628,19 @@ th {
     grid-template-areas:
       "bubbles bubbles"
       "left right";
-    align-items: start;
-    gap: 12px;
+    align-items: center;
+    gap: 8px;
   }
 
   .scale-bubbles {
-    justify-content: flex-start;
-    gap: 10px;
-    padding-bottom: 6px;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    padding-bottom: 2px;
   }
 
   .scale-side {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     line-height: 1.25;
   }
 
@@ -656,5 +654,42 @@ th {
 
   .hero h2 {
     max-width: 12ch;
+  }
+
+  #respondent-view {
+    padding-inline: 8px;
+  }
+
+  #respondent-view .section-card {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 8px 2px 0;
+  }
+
+  #respondent-view .section-heading {
+    margin-bottom: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(88, 110, 128, 0.12);
+  }
+
+  #respondent-view .rendered-field {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(88, 110, 128, 0.12);
+    border-radius: 0;
+    padding: 12px 4px 14px;
+  }
+
+  #respondent-view .rendered-field:first-child {
+    border-top: 1px solid rgba(88, 110, 128, 0.12);
+  }
+
+  #respondent-view .statement-card {
+    border-radius: 12px;
+    border: 1px solid rgba(88, 110, 128, 0.1);
+    margin-block: 6px;
+    padding: 12px;
   }
 }

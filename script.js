@@ -712,11 +712,19 @@ function scaleStyles(steps) {
 }
 
 function scaleSizes(steps) {
+  const isMobile = window.matchMedia("(max-width: 920px)").matches;
   const center = (steps - 1) / 2;
+  const edgeSize = isMobile
+    ? (steps >= 9 ? 32 : steps >= 7 ? 36 : 40)
+    : 60;
+  const centerSize = isMobile
+    ? (steps >= 9 ? 18 : steps >= 7 ? 22 : 28)
+    : 44;
+
   return Array.from({ length: steps }, (_, index) => {
     const distance = Math.abs(index - center);
     const factor = center === 0 ? 1 : distance / center;
-    return Math.round(44 + factor * 16);
+    return Math.round(centerSize + factor * (edgeSize - centerSize));
   });
 }
 
